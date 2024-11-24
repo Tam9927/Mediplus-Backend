@@ -1,6 +1,7 @@
 
 
 import patientRepository from './patient.reporitory';
+import { CreatePatientDto } from 'src/dto/create-patient.dto';
 //import { PatientRepository } from './patient.reporitory';
 
 export class PatientService {
@@ -11,7 +12,7 @@ export class PatientService {
 //     return await patient;
 //   }
 
-async createPatient(data: any) {
+async createPatient(data: CreatePatientDto) {
     console.log('Creating patient with data in service:', data);  // Log the incoming data
     const patient = await patientRepository.create(data);
     console.log('Patient created in service:', patient);  // Log the created patient

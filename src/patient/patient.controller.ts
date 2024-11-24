@@ -1,6 +1,9 @@
 import { Controller, Get, Post, Param, Body, Patch, Delete } from '@nestjs/common';
 //import {PatientService} from './patient.service';
 import {PatientService} from "./patient.service"
+import { CreatePatientDto } from 'src/dto/create-patient.dto';
+import { ValidationPipe } from '@nestjs/common';
+import { UpdatePatientDto } from 'src/dto/update-patient.dto';
 
 @Controller('patients')
 export class PatientController {
@@ -8,25 +11,15 @@ export class PatientController {
 
 
 
-//   async createPatient(@Body() data: any) {
-//     try {
-//       const patient = await this.patientService.createPatient(data);
-//       return patient;  // Ensure patient is being returned after creation
-//     } catch (error) {
-//       return { message: error.message };
-//     }
-// }
-
 // In the controller
 @Post()
-async createPatient(@Body() data: any) {
-    console.log('Received data in controller:', data);  // Log the incoming request data
+async createPatient(@Body(new ValidationPipe()) data: CreatePatientDto) {
+      
     try {
       const patient = await this.patientService.createPatient(data);
-      console.log('Patient created:', patient);  // Log the created patient
+      // Log the created patient
       return patient;
     } catch (error) {
-      console.error('Error in creating patient:', error);  // Log the error if it occurs
       return { message: error.message };
     }
   }
@@ -43,7 +36,7 @@ async createPatient(@Body() data: any) {
   }
 
   @Patch(':id')
-  async updatePatient(@Param('id') id: number, @Body() data: any) {
+  async updatePatient(@Param('id') id: number, @Body(new ValidationPipe()) data: UpdatePatientDto) {
     return await this.patientService.updatePatient(id, data);
   }
 
