@@ -12,6 +12,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { PatientModule } from './patient/patient.module';
+import { DoctorModule } from './doctor/doctor.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { PatientModule } from './patient/patient.module';
       synchronize: true, // This will automatically sync the models to the database
     }),
     PatientModule,
+    DoctorModule,
   ],
 })
 export class AppModule {} 
