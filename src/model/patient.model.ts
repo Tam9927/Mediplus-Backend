@@ -1,15 +1,17 @@
+// doctor.model.ts
 import { Model, DataTypes } from 'sequelize';
-import sequelize from '../database/sequelize'; // Ensure the sequelize instance is exported from this file
+import sequelize from '../database/sequelize'; // Import sequelize instance first
+import Doctor from './doctor.model';  // Import the Patient model after sequelize instance
 
 class Patient extends Model {
-    public id!: number;
-    public name!: string;
-    public age!: number;
-    public contact!: string;
-    public doctor_id?: number;
-    public agent_id?: number;
-    public due_amount!: number;
-  }
+  public id!: number;
+  public name!: string;
+  public age!: number;
+  public contact!: string;
+  public doctor_id?: number;
+  public agent_id?: number;
+  public due_amount!: number;
+}
 
 Patient.init(
   {
@@ -45,9 +47,10 @@ Patient.init(
   },
   {
     sequelize,
-    modelName: 'Patient',
+    modelName: 'Doctor',
     timestamps: true,
   }
 );
+
 
 export default Patient;

@@ -17,6 +17,7 @@ async function bootstrap() {
   //   console.error('Unable to connect to the database:', error);
   // 
 
+  await app.listen(process.env.PORT ?? 3000); 
   
   try {
     await sequelize.sync({ force: false });  // If you use { force: true }, it drops the tables each time
@@ -26,7 +27,7 @@ async function bootstrap() {
   }
   
   // Start the app
-  await app.listen(process.env.PORT ?? 3000); 
+  //await app.listen(process.env.PORT ?? 3000); 
 
 
 }

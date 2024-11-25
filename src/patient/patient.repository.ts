@@ -1,6 +1,6 @@
 import Patient from '../model/patient.model';
 
-export class PatientRepository {
+ class PatientRepository {
 //   async create(data: any) {
 //     const patient= Patient.create(data);
 //     return await patient;
