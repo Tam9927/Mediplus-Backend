@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsPositive, IsPhoneNumber } from 'class-validator';
+import { IsString, IsNumber, IsPositive, IsPhoneNumber, IsNotEmpty, isNotEmpty } from 'class-validator';
 
 export class CreateDoctorDto {
   @IsString()

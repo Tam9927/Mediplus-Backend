@@ -13,6 +13,7 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { PatientModule } from './patient/patient.module';
 import { DoctorModule } from './doctor/doctor.module';
+import { AgentModule } from './agent/agent.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { DoctorModule } from './doctor/doctor.module';
     }),
     PatientModule,
     DoctorModule,
+    AgentModule,
   ],
 })
 export class AppModule {} 

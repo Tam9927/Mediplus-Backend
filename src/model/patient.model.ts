@@ -35,6 +35,7 @@ Patient.init(
     contact: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     doctor_id: {
       type: DataTypes.INTEGER,

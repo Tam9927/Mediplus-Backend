@@ -1,57 +1,129 @@
-import { Controller, Get, Post, Param, Body, Patch, Delete } from '@nestjs/common';
-import { DoctorCreateFailedException,DoctorDeleteFailedException,DoctorNotFoundException,DoctorUpdateFailedException } from 'src/exception/doctor.exception';
-import { DoctorService } from './doctor.service';
-import { CreateDoctorDto } from 'src/dto/create-doctor.dto';
-import { ValidationPipe } from '@nestjs/common';
-import { UpdateDoctorDto } from 'src/dto/update-doctor.dto';
-
-@Controller('doctors')
-export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) {}
-
-  @Post()
-  async createDoctor(@Body(new ValidationPipe()) data: CreateDoctorDto) {
-    try {
-      const doctor = await this.doctorService.createDoctor(data);
-      return doctor;
-    } catch (error) {
-        
+import { 
+    Controller, 
+    Get, 
+    Post, 
+    Param, 
+    Body, 
+    Patch, 
+    Delete, 
+  } from '@nestjs/common';
+  import { DoctorService } from './doctor.service';
+  import { CreateDoctorDto } from 'src/dto/create-doctor.dto';
+  import { UpdateDoctorDto } from 'src/dto/update-doctor.dto';
+  import {
+    DoctorNotFoundException,
+    DoctorUpdateFailedException,
+    DoctorCreateFailedException,
+    DoctorDeleteFailedException,
+  } from '../exception/doctor.exception';
+  import { ValidationPipe } from '@nestjs/common';
+  
+  @Controller('doctors')
+  export class DoctorController {
+    constructor(private readonly doctorService: DoctorService) {}
+  
+    @Post()
+    async createDoctor(@Body(new ValidationPipe()) data: CreateDoctorDto) {
+      try{
+        const doctor = await this.doctorService.createDoctor(data);
+      if (!doctor) {
         throw new DoctorCreateFailedException();
-      //return { message: error.message };
+      }
+      return {
+        success: true,
+        message: 'Doctor created successfully',
+        data: doctor,
+      };
+    } catch(error){
+          throw new DoctorCreateFailedException();
+    }
+    }
+  
+    @Get(':id')
+    async getDoctor(@Param('id') id: number) {
+      try{
+           const doctor = await this.doctorService.getDoctorById(id);
+       if (!doctor) {
+        throw new DoctorNotFoundException(id);
+      }
+      return {
+        success: true,
+        data: doctor,
+      };
+    } catch(error){
+        throw new DoctorNotFoundException(id);
+    }
+    }
+  
+    @Get()
+    async getAllDoctors() {
+        
+        const doctors = await this.doctorService.getAllDoctors();
+      return {
+        success: true,
+        data: doctors,
+      };
+    }
+  
+    @Get(':id/patients')
+    async getPatientsByDoctorId(@Param('id') doctorId: number) {
+      try{
+        
+        const patients = await this.doctorService.getPatientsByDoctorId(doctorId);
+      if (!patients) {
+        throw new DoctorNotFoundException(doctorId);
+      }
+      return {
+        success: true,
+        data: patients,
+      };
+    } catch(error)
+    {
+       throw new DoctorNotFoundException(doctorId);;
+    }
+    }
+  
+    @Patch(':id')
+    async updateDoctor(
+      @Param('id') id: number,
+      @Body(new ValidationPipe()) data: UpdateDoctorDto,
+    ) {
+    
+    try{
+        const updatedDoctor = await this.doctorService.updateDoctor(id, data);
+      if (!updatedDoctor) {
+        throw new DoctorUpdateFailedException(id);
+      }
+      return {
+        success: true,
+        message: 'Doctor updated successfully',
+        data: updatedDoctor,
+      };
+    } catch(error)
+    {
+        throw new DoctorUpdateFailedException(id);
+    }
+    }
+
+  
+    @Delete(':id')
+    async deleteDoctor(@Param('id') id: number) {
+      try{
+        
+        const deleted = await this.doctorService.deleteDoctor(id);
+      if (!deleted) {
+        throw new DoctorDeleteFailedException(id);
+      }
+      return {
+        success: true,
+        message: 'Doctor deleted successfully',
+      };
+    }catch(error)
+    {
+        throw new DoctorDeleteFailedException(id);;
+    }
     }
   }
-
-  @Get(':id')
-  async getDoctor(@Param('id') id: number) {
-        return await this.doctorService.getDoctorById(id);
-
-  }
-
-  @Get()
-  async getAllDoctors() {
-    return await this.doctorService.getAllDoctors();
-  }
-
-  @Get(':id/patients')
-async getPatientsByDoctorId(@Param('id') doctorId: number) {
-  try {
-    const patients = await this.doctorService.getPatientsByDoctorId(doctorId);
-    return patients;
-  } catch (error) {
-    return null;
-  }
-}
-
-
-  @Patch(':id')
-  async updateDoctor(@Param('id') id: number, @Body(new ValidationPipe()) data: UpdateDoctorDto) {
-    return await this.doctorService.updateDoctor(id, data);
-  }
-
-  @Delete(':id')
-  async deleteDoctor(@Param('id') id: number) {
-    return await this.doctorService.deleteDoctor(id);
-  }
-}
+  
 
 

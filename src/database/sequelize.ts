@@ -1,4 +1,5 @@
 import { Sequelize } from 'sequelize';
+import "../model/index"
 
 
  const sequelize = new Sequelize({
@@ -26,7 +27,7 @@ async function authenticateAndSync() {
 
 authenticateAndSync();
 
-sequelize.sync({force:true}).then(() => {
+sequelize.sync().then(() => {
   console.log('Database synced');
 });
 
