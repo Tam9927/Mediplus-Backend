@@ -11,7 +11,6 @@ export class PatientController {
 
 
 
-// In the controller
 @Post()
 async createPatient(@Body(new ValidationPipe()) data: CreatePatientDto) {
       

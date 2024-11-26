@@ -15,7 +15,6 @@ class Doctor extends Model {
   public name!: string;
   public contact!: string;
   public specialization: string;
-  
   public patients?: Patient[];
 
 }
@@ -34,11 +33,13 @@ Doctor.init(
     contact: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true
     },
     specialization: {
         type: DataTypes.STRING,
         allowNull: false,
       },
+
     
   },
   {
@@ -47,10 +48,6 @@ Doctor.init(
     timestamps: true,
   }
 );
-
-
-//Doctor.hasMany(Patient, { foreignKey: 'doctor_id', as: 'patients' });
-
 
 
 export default Doctor;

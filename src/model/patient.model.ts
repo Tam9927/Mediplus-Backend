@@ -34,7 +34,7 @@ Patient.init(
     },
     doctor_id: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     agent_id: {
       type: DataTypes.INTEGER,
@@ -47,7 +47,7 @@ Patient.init(
   },
   {
     sequelize,
-    modelName: 'Doctor',
+    modelName: 'Patient',
     timestamps: true,
   }
 );

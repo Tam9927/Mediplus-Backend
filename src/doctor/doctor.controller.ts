@@ -28,15 +28,15 @@ export class DoctorController {
     return await this.doctorService.getAllDoctors();
   }
 
-//   @Get(':id/patients')
-// async getPatientsByDoctorId(@Param('id') doctorId: number) {
-//   try {
-//     const patients = await this.doctorService.getPatientsByDoctorId(doctorId);
-//     return patients;
-//   } catch (error) {
-//     return { message: error.message };
-//   }
-// }
+  @Get(':id/patients')
+async getPatientsByDoctorId(@Param('id') doctorId: number) {
+  try {
+    const patients = await this.doctorService.getPatientsByDoctorId(doctorId);
+    return patients;
+  } catch (error) {
+    return { message: error.message };
+  }
+}
 
 
   @Patch(':id')
@@ -49,3 +49,5 @@ export class DoctorController {
     return await this.doctorService.deleteDoctor(id);
   }
 }
+
+

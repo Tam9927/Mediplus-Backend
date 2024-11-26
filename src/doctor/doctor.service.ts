@@ -32,8 +32,8 @@ export class DoctorService {                           //private readonly new do
   }
 
   async getPatientsByDoctorId(doctorId: number) {
-    const doctor = await doctorRepository.findByIdWithPatients(doctorId);
-    if (!doctor) {
+    const doctor = await doctorRepository.getDoctorWithPatients(doctorId);
+    if (doctor===null) {
       throw new DoctorNotFoundException(doctorId);
     }
     return doctor.patients;

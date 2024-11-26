@@ -1,6 +1,6 @@
-import Doctor from '../model/doctor.model';
-import Patient from 'src/model/patient.model';
+import { Doctor, Patient } from '../model'; // Always use central index
 
+//import Patient from '../model/patient.model';
 
 class DoctorRepository {
   // Create a new doctor record
@@ -16,11 +16,36 @@ class DoctorRepository {
     return await Doctor.findByPk(id, { include: { all: true } }); // Include associations (e.g., patients)
   }
 
-  async findByIdWithPatients(doctorId: number) {
-    return Doctor.findOne({
-      where: { id: doctorId },
-      include: [{ model: Patient, as: 'patients' }],
-    });
+//   async findByIdWithPatients(doctorId: number) {
+//      console.log( Doctor.findOne({
+//       where: { id: doctorId },
+//       include: [{ model: Patient, as: 'patients' }],
+//     }));
+
+//     return Doctor.findOne({
+//         where: { id: doctorId },
+//         include: [{ model: Patient, as: 'patients' }],
+//       });
+
+// }
+  
+
+async getDoctorWithPatients(doctorId: number) {
+    try {
+      const doctor = await Doctor.findOne({
+        where: { id: doctorId },
+        include: [{
+          model: Patient,
+          as: 'patients', // Alias used in the association
+        }],
+      });
+  
+      return doctor; // Either a Doctor instance or null
+  
+    } catch (error) {
+      console.error('Error fetching doctor with patients:', error);
+      return null; // Return null if there is an error
+    }
   }
   
 
