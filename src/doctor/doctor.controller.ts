@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Param, Body, Patch, Delete } from '@nestjs/common';
+import { DoctorCreateFailedException,DoctorDeleteFailedException,DoctorNotFoundException,DoctorUpdateFailedException } from 'src/exception/doctor.exception';
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from 'src/dto/create-doctor.dto';
 import { ValidationPipe } from '@nestjs/common';
@@ -14,13 +15,16 @@ export class DoctorController {
       const doctor = await this.doctorService.createDoctor(data);
       return doctor;
     } catch (error) {
-      return { message: error.message };
+        
+        throw new DoctorCreateFailedException();
+      //return { message: error.message };
     }
   }
 
   @Get(':id')
   async getDoctor(@Param('id') id: number) {
-    return await this.doctorService.getDoctorById(id);
+        return await this.doctorService.getDoctorById(id);
+
   }
 
   @Get()
@@ -34,7 +38,7 @@ async getPatientsByDoctorId(@Param('id') doctorId: number) {
     const patients = await this.doctorService.getPatientsByDoctorId(doctorId);
     return patients;
   } catch (error) {
-    return { message: error.message };
+    return null;
   }
 }
 

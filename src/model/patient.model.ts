@@ -27,6 +27,10 @@ Patient.init(
     age: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: 0,
+        max: 120,
+      },
     },
     contact: {
       type: DataTypes.STRING,

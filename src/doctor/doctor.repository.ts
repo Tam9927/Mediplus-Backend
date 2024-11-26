@@ -5,7 +5,7 @@ import { Doctor, Patient } from '../model'; // Always use central index
 class DoctorRepository {
   // Create a new doctor record
   async create(data: any) {
-    console.log('Creating doctor with data in repository:', data); // Log incoming data
+    
     const doctor = await Doctor.create(data);
     console.log('Doctor created in repository:', doctor); // Log the created record
     return doctor;
@@ -66,6 +66,10 @@ async getDoctorWithPatients(doctorId: number) {
   // Get all doctor records
   async findAll() {
     return await Doctor.findAll({ include: { all: true } }); // Include associated patients if any
+  }
+
+  async countBySpecialization(specialization: string) {
+    return await Doctor.count({ where: { specialization } });
   }
 }
 

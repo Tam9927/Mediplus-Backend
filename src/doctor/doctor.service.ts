@@ -13,6 +13,10 @@ import {
 export class DoctorService {                           //private readonly new doctorRepo:DoctorRepository if exported as a class, not an instance or singleton
   async createDoctor(data: CreateDoctorDto) {
     try {
+       const doctorCount = await doctorRepository.countBySpecialization(data.specialization);
+    if (doctorCount >= 2) {
+      throw new Error(`Cannot add more than 2 doctors in the ${data.specialization} specialization.`);
+    } 
       const doctor = await doctorRepository.create(data);
       if (!doctor) {
         throw new DoctorCreateFailedException();

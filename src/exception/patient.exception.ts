@@ -20,7 +20,7 @@ export class PatientDeleteFailedException extends HttpException {
 
 export class PatientCreateFailedException extends HttpException {
   constructor() {
-    super('Failed to create patient', HttpStatus.BAD_REQUEST);
+    super('Failed to create patient', 400);
   }
 }
 
