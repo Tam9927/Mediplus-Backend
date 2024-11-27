@@ -2,11 +2,10 @@
 import "./model/index"
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import Doctor from './model/doctor.model';
+ import Doctor from './model/doctor.model';
 import Patient from './model/patient.model';
-//import sequelize = require("./database/sequelize")
+import Agent from './model/agent.model';
 //const sequelize = require('./database/sequelize'); 
-import sequelize from "./database/sequelize";
 
 async function bootstrap() { 
   // Create the NestJS app
@@ -20,6 +19,7 @@ async function bootstrap() {
   
   console.log(Doctor.associations);
   console.log(Patient.associations);
+  console.log(Agent.associations);
   
 
 }

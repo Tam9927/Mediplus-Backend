@@ -39,7 +39,7 @@ Patient.init(
     },
     doctor_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     agent_id: {
       type: DataTypes.INTEGER,

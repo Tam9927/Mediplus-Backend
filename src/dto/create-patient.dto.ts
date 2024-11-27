@@ -2,13 +2,15 @@ import { IsString, IsNumber, IsOptional, IsPositive, IsPhoneNumber, IsEmpty, IsN
 
 export class CreatePatientDto {
   @IsString()
+  @IsNotEmpty()
   name: string;
 
   @IsNumber()
   @IsPositive()
   age: number;
 
-  @IsPhoneNumber('BD')  // Update 'BD' to your desired country code
+  @IsPhoneNumber('BD')
+  @IsNotEmpty()  // Update 'BD' to your desired country code
   contact: string;
 
   @IsOptional()

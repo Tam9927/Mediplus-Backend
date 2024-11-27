@@ -27,16 +27,16 @@ import {
       try{
         const doctor = await this.doctorService.createDoctor(data);
       if (!doctor) {
-        throw new DoctorCreateFailedException();
+        throw new DoctorCreateFailedException();                            //will work on the error handling ehre
       }
       return {
         success: true,
         message: 'Doctor created successfully',
         data: doctor,
       };
-    } catch(error){
-          throw new DoctorCreateFailedException();
-    }
+     } catch(error){
+           throw new DoctorCreateFailedException();
+     }
     }
   
     @Get(':id')
@@ -79,7 +79,7 @@ import {
       };
     } catch(error)
     {
-       throw new DoctorNotFoundException(doctorId);;
+       throw new DoctorNotFoundException(doctorId);
     }
     }
   
