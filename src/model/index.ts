@@ -1,7 +1,6 @@
 import Doctor from "./doctor.model";
 import Patient from "./patient.model";
 import Agent from "./agent.model";
-import Manager from "./manager.model";
 import Commission from "./commission.model";
 
 
@@ -21,5 +20,5 @@ Commission.belongsTo(Agent, { foreignKey: 'agentId',targetKey: 'id'});
 
 
 
-export { Doctor, Patient, Agent, Manager, Commission };                                         //database migrations in the fututre
+export { Doctor, Patient, Agent, Commission };                                         //database migrations in the fututre
 
