@@ -27,7 +27,7 @@ async function authenticateAndSync() {
 
 authenticateAndSync();
 
-sequelize.sync({force:true}).then(() => {
+sequelize.sync({alter:true}).then(() => {
   console.log('Database synced');
 });
 

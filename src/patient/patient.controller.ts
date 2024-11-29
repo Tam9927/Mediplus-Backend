@@ -1,55 +1,4 @@
-// import { Controller, Get, Post, Param, Body, Patch, Delete } from '@nestjs/common';
-// import { PatientCreateFailedException,PatientDeleteFailedException,PatientNotFoundException,PatientUpdateFailedException } from 'src/exception/patient.exception';
-// //import {PatientService} from './patient.service';
-// import {PatientService} from "./patient.service"
-// import { CreatePatientDto } from 'src/dto/create-patient.dto';
-// import { ValidationPipe } from '@nestjs/common';
-// import { UpdatePatientDto } from 'src/dto/update-patient.dto';
 
-// @Controller('patients')
-// export class PatientController {
-//   constructor(private readonly patientService: PatientService) {}  //as it is class now, no typeof needed
-
-
-
-// @Post()
-// async createPatient(@Body(new ValidationPipe()) data: CreatePatientDto) {
-      
-//     try {
-//       const patient = await this.patientService.createPatient(data);
-//       // Log the created patient
-//       return {
-//         message: 'Patient created successfully',
-//         patient,
-//       };
-//     } catch (error) {
-      
-//       throw new PatientCreateFailedException()
-      
-//     }
-//   }
-  
-
-//   @Get(':id')
-//   async getPatient(@Param('id') id: number) {
-//     return await this.patientService.getPatientById(id);
-//   }
-
-//   @Get()
-//   async getAllPatients() {
-//     return await this.patientService.getAllPatients();
-//   }
-
-//   @Patch(':id')
-//   async updatePatient(@Param('id') id: number, @Body(new ValidationPipe()) data: UpdatePatientDto) {
-//     return await this.patientService.updatePatient(id, data);
-//   }
-
-//   @Delete(':id')
-//   async deletePatient(@Param('id') id: number) {
-//     return await this.patientService.deletePatient(id);
-//   }
-// }
 
 
 import {
@@ -96,6 +45,9 @@ export class PatientController {
   async getPatient(@Param('id') id: number) {
     try {
       const patient = await this.patientService.getPatientById(id);
+      if (!patient) {
+        throw new PatientNotFoundException(id);
+      }
       return patient;
     } catch (error) {
       throw new PatientNotFoundException(id);
@@ -106,7 +58,11 @@ export class PatientController {
   @Get()
   async getAllPatients() {
     try {
-      return await this.patientService.getAllPatients();
+      const patients=await this.patientService.getAllPatients();
+      if (!patients) {
+        return {message:'No patients exist'};
+      }
+
     } catch (error) {
       throw new PatientCreateFailedException();
     }
@@ -119,6 +75,9 @@ export class PatientController {
   ) {
     try {
       const updatedPatient = await this.patientService.updatePatient(id, data);
+      if (!updatedPatient) {
+        throw new PatientUpdateFailedException(id);
+      }
       return {
         message: 'Patient updated successfully',
         updatedPatient,
@@ -131,7 +90,10 @@ export class PatientController {
   @Delete(':id')
   async deletePatient(@Param('id') id: number) {
     try {
-      await this.patientService.deletePatient(id);
+      const deletedPatient =await this.patientService.deletePatient(id);
+      if (!deletedPatient) {
+        throw new PatientDeleteFailedException(id);
+      }
       return {
         message: 'Patient deleted successfully',
       };

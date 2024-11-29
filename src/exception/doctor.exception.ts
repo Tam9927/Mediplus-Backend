@@ -13,14 +13,14 @@ export class DoctorUpdateFailedException extends HttpException {
 }
 
 export class DoctorDeleteFailedException extends HttpException {
-  constructor(id: number) {
-    super(`Failed to delete doctor with ID ${id}`, HttpStatus.BAD_REQUEST);
+  constructor(id: number, message:string='Failed to Delete Doctor') {
+    super(message+` ID: ${id}`, HttpStatus.BAD_REQUEST);
   }
 }
 
 export class DoctorCreateFailedException extends HttpException {
-  constructor() {
-    super('Failed to create doctor', HttpStatus.BAD_REQUEST);
+  constructor(message: string = 'Failed to create Doctor') {
+    super(message, HttpStatus.BAD_REQUEST);
   }
 }
 

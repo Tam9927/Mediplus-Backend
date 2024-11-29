@@ -17,7 +17,7 @@ class DoctorRepository {
   }
 
 //   async findByIdWithPatients(doctorId: number) {
-//      console.log( Doctor.findOne({
+//      console.log( Doctor.findOne({ 
 //       where: { id: doctorId },
 //       include: [{ model: Patient, as: 'patients' }],
 //     }));

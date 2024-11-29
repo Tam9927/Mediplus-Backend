@@ -8,8 +8,8 @@ import {
     Delete, 
   } from '@nestjs/common';
   import { DoctorService } from './doctor.service';
-  import { CreateDoctorDto } from 'src/dto/create-doctor.dto';
-  import { UpdateDoctorDto } from 'src/dto/update-doctor.dto';
+  import { CreateDoctorDto } from '../dto/create-doctor.dto';
+  import { UpdateDoctorDto } from '../dto/update-doctor.dto';
   import {
     DoctorNotFoundException,
     DoctorUpdateFailedException,
@@ -27,7 +27,7 @@ import {
       try{
         const doctor = await this.doctorService.createDoctor(data);
       if (!doctor) {
-        throw new DoctorCreateFailedException();                            //will work on the error handling ehre
+        throw new DoctorCreateFailedException('Duplicate entry/ not more than 2 doctors in one specialization');                            //will work on the error handling ehre
       }
       return {
         success: true,
@@ -35,7 +35,7 @@ import {
         data: doctor,
       };
      } catch(error){
-           throw new DoctorCreateFailedException();
+           throw new DoctorCreateFailedException(error.message);
      }
     }
   
@@ -112,7 +112,7 @@ import {
         
         const deleted = await this.doctorService.deleteDoctor(id);
       if (!deleted) {
-        throw new DoctorDeleteFailedException(id);
+        throw new DoctorDeleteFailedException(id,'Doctor Not Found');
       }
       return {
         success: true,
@@ -120,7 +120,7 @@ import {
       };
     }catch(error)
     {
-        throw new DoctorDeleteFailedException(id);;
+        throw new DoctorDeleteFailedException(id,error.message);;
     }
     }
   }

@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
  import Doctor from './model/doctor.model';
 import Patient from './model/patient.model';
 import Agent from './model/agent.model';
+import { Commission } from "./model/index";
 //const sequelize = require('./database/sequelize'); 
 
 async function bootstrap() { 
@@ -18,8 +19,9 @@ async function bootstrap() {
   
   
   console.log(Doctor.associations);
-  console.log(Patient.associations);
+  console.log(Patient.associations); 
   console.log(Agent.associations);
+  console.log(Commission.associations)
   
 
 }
