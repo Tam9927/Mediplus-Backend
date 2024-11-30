@@ -7,7 +7,7 @@
 //   controllers: [AppController],
 //   providers: [AppService],
 // })
-// export class AppModule {}
+// export class AppModule {}  
 
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
@@ -15,7 +15,7 @@ import { PatientModule } from './patient/patient.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { AgentModule } from './agent/agent.module';
 import { CommissionModule } from './commission/commission.module';
-
+    
 @Module({
   imports: [
     SequelizeModule.forRoot({

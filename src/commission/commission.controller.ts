@@ -22,28 +22,51 @@ import {
   export class CommissionController {
     constructor(private readonly commissionService: CommissionService) {}
   
+    // @Post()
+    // async createCommission(@Body(new ValidationPipe()) data: CreateCommissionDto) {
+    //   try {
+    //     const commission = await this.commissionService.createCommission(data);
+    //     // if (!commission) {
+    //     //   throw new CommissionCreateFailedException();
+    //     // }
+    //     return {
+    //       success: true, 
+    //       message: 'Commission created successfully',
+    //       data: commission,
+    //     };
+    //   } catch (error) {
+    //     throw error
+    //   }
+    // }
+  
     @Post()
     async createCommission(@Body(new ValidationPipe()) data: CreateCommissionDto) {
       try {
         const commission = await this.commissionService.createCommission(data);
-        // if (!commission) {
-        //   throw new CommissionCreateFailedException();
+        // if(!commission)
+        // {
+        //     throw new CommissionCreateFailedException()
         // }
         return {
-          success: true, 
+          success: true,
           message: 'Commission created successfully',
           data: commission,
         };
       } catch (error) {
-        throw error
+        // Handle specific exceptions with appropriate messages
+        if (error instanceof CommissionCreateFailedException) {
+          throw new CommissionCreateFailedException(error.message);
+        }
+        throw error;
       }
     }
-  
+    
+
     @Get('doctor/:doctorId')
     async getDoctorCommissions(@Param('doctorId') doctorId: number) {
       try {
         const commissions = await this.commissionService.getCommissionsByDoctor(doctorId);
-        if (!commissions) {
+        if (commissions.length==0) {
           throw new CommissionNotFoundException(doctorId);
         }
         return {
@@ -59,7 +82,7 @@ import {
     async getAgentCommissions(@Param('agentId') agentId: number) {
       try {
         const commissions = await this.commissionService.getCommissionsByAgent(agentId);
-        if (!commissions) {
+        if (commissions.length==0) {
           throw new CommissionNotFoundException(agentId);
         }
         return {
