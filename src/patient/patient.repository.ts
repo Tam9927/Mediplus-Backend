@@ -1,4 +1,4 @@
-import Patient from '../model/patient.model';
+import {Patient} from '../model';
 
  class PatientRepository {
 //   async create(data: any) {
@@ -9,6 +9,7 @@ import Patient from '../model/patient.model';
 async create(data: any) {
     console.log('Creating patient with data in repository:', data);  // Log the incoming data
     const patient = await Patient.create(data);
+    console.log(data);
     console.log('Patient created in repository:', patient);  // Log the result
     return patient;
   }

@@ -15,6 +15,10 @@ import { PatientModule } from './patient/patient.module';
 import { DoctorModule } from './doctor/doctor.module';
 import { AgentModule } from './agent/agent.module';
 import { CommissionModule } from './commission/commission.module';
+import { ManagerModule } from './manager/manager.module';
+import { TestCategoryModule } from './test-category/test-category.module';
+import { TestModule } from './test/test.module';
+import { TestRequestModule } from './test-request/test-request.module';
     
 @Module({
   imports: [
@@ -32,6 +36,10 @@ import { CommissionModule } from './commission/commission.module';
     DoctorModule,
     AgentModule,
     CommissionModule,
+    ManagerModule,
+    TestCategoryModule,
+    TestModule,
+    TestRequestModule,
   ],
 })
 export class AppModule {} 

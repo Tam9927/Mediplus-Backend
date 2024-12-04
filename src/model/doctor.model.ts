@@ -22,8 +22,8 @@ class Doctor extends Model {
 Doctor.init(
   {
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement:true,
+        type: DataTypes.INTEGER,
+        autoIncrement:true,
       primaryKey: true,
     },
     name: {
