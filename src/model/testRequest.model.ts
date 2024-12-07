@@ -6,7 +6,13 @@ import Test from './test.model';
 
 class TestRequest extends Model {}
 
-TestRequest.init({
+TestRequest.init({ 
+    
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement:true,
+      primaryKey: true,
+    }, 
   doctorId: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -23,18 +29,13 @@ TestRequest.init({
       key: 'id',
     },
   },
-  testId: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
-      model: Test,
-      key: 'id',
-    },
-  },
-  status: {
-    type: DataTypes.ENUM('requested', 'approved', 'completed'),
+  
+  paymentStatus: {
+    type: DataTypes.ENUM('requested', 'Paid', 'Due'),
     defaultValue: 'requested',
   },
+
+
   remarks: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -45,6 +46,7 @@ TestRequest.init({
   tableName: 'test_requests',
 });
 
+         
 
 
 export default TestRequest;  

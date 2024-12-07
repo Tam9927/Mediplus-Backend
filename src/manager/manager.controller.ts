@@ -1,37 +1,42 @@
 import { Controller, Post, Body, Param, Patch } from '@nestjs/common';
-import {ManagerService} from './manager.service';
+import { ManagerService } from './manager.service';
 import { ValidationPipe } from '@nestjs/common';
-import { ManagerAlreadyExistsException,ManagerAuthenticationFailedException } from 'src/exception/manager.exception';
+import { ManagerAlreadyExistsException, ManagerAuthenticationFailedException } from 'src/exception/manager.exception';
 
 @Controller('managers')
 export class ManagerController {
-  constructor(private readonly managerService:ManagerService) {}
+  constructor(private readonly managerService: ManagerService) {}
 
-  @Post('register')
+  @Post('register')  
   async register(@Body(new ValidationPipe()) data) {
-    const manager = await this.managerService.register(data);
-    if (!manager) {
+    try {
+      const manager = await this.managerService.register(data);
+      return { success: true, message: 'Manager registered successfully', data: manager };
+    } catch (error) {
+      if (error.message.includes('already')) {
+        throw new Error(error.message);
+      }
       throw new ManagerAlreadyExistsException(data.username);
     }
-    return { success: true, message: 'Manager registered successfully', data: manager };
-  }
+  }  
 
   @Post('login')
   async login(@Body(new ValidationPipe()) { username, password }) {
-    const manager = await this.managerService.login(username, password);
-    if (!manager) {   
+    try {
+      const manager = await this.managerService.login(username, password);
+      return { success: true, message: 'Login successful', data: manager };
+    } catch (error) {
       throw new ManagerAuthenticationFailedException(username);
     }
-    return { success: true, message: 'Login successful', data: manager };
   }
 
   @Patch(':id/password')
   async changePassword(@Param('id') id, @Body('newPassword') newPassword) {
-    const updatedManager = await this.managerService.changePassword(id, newPassword);
-    if (updatedManager==null) {
-      throw new Error(`Failed to update password for Manager ID: ${id}`);
+    try {
+      const updatedManager = await this.managerService.changePassword(id, newPassword);
+      return { success: true, message: 'Password updated successfully' };
+    } catch (error) {
+      throw new Error(error.message);
     }
-    return { success: true, message: 'Password updated successfully' };
   }
 }
-

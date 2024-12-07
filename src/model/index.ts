@@ -5,7 +5,8 @@ import Commission from "./commission.model";
 import Manager from "./manager.model"; 
 import Test from "./test.model";   
 import TestCategory from "./testCategory.model";
-import TestRequest from "./testRequest.model";        
+import TestRequest from "./testRequest.model";
+import TestRequestTest from "./testRequestTest.model";            
           
 
 Doctor.hasMany(Patient, { foreignKey: 'doctor_id', as: 'patients',onDelete: 'SET NULL' });
@@ -26,14 +27,17 @@ TestCategory.hasMany(Test, { foreignKey: 'testCategoryId', as: 'tests' });
 
 Doctor.hasMany(TestRequest, { foreignKey: 'doctorId', as: 'testRequests' });
 Patient.hasMany(TestRequest, { foreignKey: 'patientId', as: 'testRequests' });
-Test.hasMany(TestRequest, { foreignKey: 'testId', as: 'testRequests' });
+//Test.hasMany(TestRequest, { foreignKey: 'testId', as: 'testRequests' });
 
 TestRequest.belongsTo(Doctor, { foreignKey: 'doctorId', as: 'doctor' });
 TestRequest.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
-TestRequest.belongsTo(Test, { foreignKey: 'testId', as: 'test' });
+//TestRequest.belongsTo(Test, { foreignKey: 'testId', as: 'test' });   
 
+    
+TestRequest.belongsToMany(Test, { through: TestRequestTest, as: 'tests', foreignKey: 'testRequestId' });
+Test.belongsToMany(TestRequest, { through: TestRequestTest, as: 'testRequests', foreignKey: 'testId' });
 
+  
 
-
-export { Doctor, Patient, Agent, Commission, Manager, Test, TestCategory };                                           //database migrations in the fututre
+export { Doctor, Patient, Agent, Commission, Manager, Test, TestCategory, TestRequest,TestRequestTest };                                           //database migrations in the fututre
 

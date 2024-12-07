@@ -40,6 +40,12 @@ Doctor.init(
         allowNull: false,
       },
 
+      totalIncome: {
+        type: DataTypes.FLOAT,
+        allowNull: false,
+        defaultValue: 0,
+      },
+
     
   },
   {

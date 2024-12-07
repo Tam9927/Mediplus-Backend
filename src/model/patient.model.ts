@@ -15,7 +15,7 @@ class Patient extends Model {
 
 Patient.init(
   {
-    id: {
+    id: {  
       type: DataTypes.INTEGER,
       autoIncrement:true,
       primaryKey: true,

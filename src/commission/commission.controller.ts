@@ -22,22 +22,7 @@ import {
   export class CommissionController {
     constructor(private readonly commissionService: CommissionService) {}
   
-    // @Post()
-    // async createCommission(@Body(new ValidationPipe()) data: CreateCommissionDto) {
-    //   try {
-    //     const commission = await this.commissionService.createCommission(data);
-    //     // if (!commission) {
-    //     //   throw new CommissionCreateFailedException();
-    //     // }
-    //     return {
-    //       success: true, 
-    //       message: 'Commission created successfully',
-    //       data: commission,
-    //     };
-    //   } catch (error) {
-    //     throw error
-    //   }
-    // }
+    
   
     @Post()
     async createCommission(@Body(new ValidationPipe()) data: CreateCommissionDto) {

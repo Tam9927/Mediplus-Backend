@@ -22,6 +22,11 @@ Test.init({
       key: 'id',
     },
   },
+
+  payment: {
+    type: DataTypes.FLOAT,
+    defaultValue: 0,
+  },
 }, {
   sequelize,
   modelName: 'Test',

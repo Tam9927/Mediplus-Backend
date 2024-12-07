@@ -2,11 +2,7 @@
 import "./model/index"
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
- import Doctor from './model/doctor.model';
-import Patient from './model/patient.model';
-import Agent from './model/agent.model';
-import { Commission, Test, TestCategory } from "./model/index";
-import TestRequest from "./model/testRequest.model";
+import { Commission, Test, TestCategory,TestRequest,TestRequestTest } from "./model/index";
 //const sequelize = require('./database/sequelize'); 
 
 async function bootstrap() { 
@@ -18,12 +14,13 @@ async function bootstrap() {
     
   
   // console.log(Doctor.associations);    
-  // console.log(Patient.associations); 
+  // console.log(Patient.associations);    
   // console.log(Agent.associations);
   // console.log(Commission.associations)
   console.log(Test.associations);
   console.log(TestCategory.associations)
   console.log(TestRequest.associations)
+  console.log(TestRequestTest.associations)    
   
 
 }

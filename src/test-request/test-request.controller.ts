@@ -1,3 +1,5 @@
+
+
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { TestRequestService } from './test-request.service';
 import { ValidationPipe } from '@nestjs/common';
@@ -6,7 +8,7 @@ import { ValidationPipe } from '@nestjs/common';
 export class TestRequestController {
   constructor(private readonly testRequestService: TestRequestService) {}
 
-  @Post('create')
+  @Post()
   async createRequest(@Body(new ValidationPipe()) data) {
     return await this.testRequestService.createRequest(data);
   }
@@ -18,6 +20,7 @@ export class TestRequestController {
 
   @Get()
   async getAllRequests() {
-    return await this.testRequestService.getAllRequests();
+    return await this.testRequestService.getAllRequests();  
   }
 }
+
