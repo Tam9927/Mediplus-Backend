@@ -1,6 +1,6 @@
 import agentRepository from './agent.repository';
-import { CreateAgentDto } from 'src/dto/create-agent.dto';
-import { UpdateAgentDto } from 'src/dto/update-agent.dto';
+import { CreateAgentDto } from 'src/agent/dto/create-agent.dto';
+import { UpdateAgentDto } from 'src/agent/dto/update-agent.dto';
 
 export class AgentService {
   async createAgent(data: CreateAgentDto) {
@@ -10,6 +10,12 @@ export class AgentService {
   async getAgentById(id: number) {
     return await agentRepository.findById(id);
   }
+
+  async getPatientsByAgentId(agentId: number) {
+    const agent = await agentRepository.getAgentWithPatients(agentId);
+    return agent ? agent.patients : null;
+  }
+
 
   async updateAgent(id: number, data: UpdateAgentDto) {
     return await agentRepository.updateById(id, data);

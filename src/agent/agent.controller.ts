@@ -8,8 +8,8 @@ import {
     Delete,
   } from '@nestjs/common';
   import { AgentService } from './agent.service';
-  import { CreateAgentDto } from '../dto/create-agent.dto';
-  import { UpdateAgentDto } from '../dto/update-agent.dto';
+  import { CreateAgentDto } from './dto/create-agent.dto';
+  import { UpdateAgentDto } from './dto/update-agent.dto';
   import {
     AgentNotFoundException,
     AgentUpdateFailedException,

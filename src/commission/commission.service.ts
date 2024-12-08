@@ -1,6 +1,6 @@
 import commissionRepository from './commission.repository';
-import { CreateCommissionDto } from '../dto/create-commission.dto';
-import { UpdateCommissionDto } from 'src/dto/update-commission.dto';
+import { CreateCommissionDto } from './dto/create-commission.dto';
+import { UpdateCommissionDto } from 'src/commission/dto/update-commission.dto';
 import {CommissionDeleteFailedException,CommissionUpdateFailedException,CommissionCreateFailedException } from 'src/exception/commission.exception';
 
 export class CommissionService {
@@ -43,7 +43,7 @@ async createCommission(data: CreateCommissionDto) {
     try {
       return await commissionRepository.create(data);
     } catch (error) {
-      throw new CommissionCreateFailedException('Doctor / Agent does not exist');
+      throw new CommissionCreateFailedException('Doctor or Agent must be provided');
     }
   }
   

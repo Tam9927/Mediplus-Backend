@@ -1,8 +1,8 @@
 
 
 import doctorRepository from './doctor.repository';
-import { CreateDoctorDto } from 'src/dto/create-doctor.dto';
-import { UpdateDoctorDto } from 'src/dto/update-doctor.dto';
+import { CreateDoctorDto } from 'src/doctor/dto/create-doctor.dto';
+import { UpdateDoctorDto } from 'src/doctor/dto/update-doctor.dto';
 
 export class DoctorService {
   async createDoctor(data: CreateDoctorDto) {

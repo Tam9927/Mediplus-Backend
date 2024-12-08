@@ -18,8 +18,8 @@ import {
   PatientDeleteFailedException,
 } from 'src/exception/patient.exception';
 import { PatientService } from './patient.service';
-import { CreatePatientDto } from 'src/dto/create-patient.dto';
-import { UpdatePatientDto } from 'src/dto/update-patient.dto';
+import { CreatePatientDto } from 'src/patient/dto/create-patient.dto';
+import { UpdatePatientDto } from 'src/patient/dto/update-patient.dto';
 
 @Controller('patients')
 export class PatientController {

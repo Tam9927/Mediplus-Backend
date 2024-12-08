@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import testCategoryRepository from './test-category.repository';
-import { TestCategoryDTO } from 'src/dto/test-category.dto';
+import { TestCategoryDTO } from 'src/test-category/dto/test-category.dto';
 
 @Injectable()
 export class TestCategoryService {

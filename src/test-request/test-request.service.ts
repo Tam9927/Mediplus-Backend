@@ -3,7 +3,7 @@
 
 import { Injectable } from '@nestjs/common';
 import testRequestRepository from './test-request.repository';
-import { TestRequestDTO } from 'src/dto/test-request.dto';
+import { TestRequestDTO } from 'src/test-request/dto/test-request.dto';
 
 @Injectable()
 export class TestRequestService {
@@ -19,7 +19,7 @@ export class TestRequestService {
       patientId,  
       paymentStatus,
     });
-        
+          
     // Step 2: Create Test associations
     if (tests && Array.isArray(tests)) {
       const testAssociations = tests.map(testId => ({
@@ -32,7 +32,7 @@ export class TestRequestService {
     return testRequest;
   }
 
-
+  
 //   async processPayment(testRequestId: number) {
 //     const testRequest = await testRequestRepository.findByIdWithTests(testRequestId);
 //     if (!testRequest) throw new Error('TestRequest not found.');

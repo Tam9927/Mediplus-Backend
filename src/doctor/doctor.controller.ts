@@ -8,8 +8,8 @@ import {
     Delete, 
   } from '@nestjs/common';
   import { DoctorService } from './doctor.service';
-  import { CreateDoctorDto } from '../dto/create-doctor.dto';
-  import { UpdateDoctorDto } from '../dto/update-doctor.dto';
+  import { CreateDoctorDto } from './dto/create-doctor.dto';
+  import { UpdateDoctorDto } from './dto/update-doctor.dto';
   import {
     DoctorNotFoundException,
     DoctorUpdateFailedException,

@@ -8,8 +8,8 @@ import {
     Delete,
   } from '@nestjs/common';
   import { CommissionService } from './commission.service';
-  import { CreateCommissionDto } from '../dto/create-commission.dto';
-  import { UpdateCommissionDto } from '../dto/update-commission.dto';
+  import { CreateCommissionDto } from './dto/create-commission.dto';
+  import { UpdateCommissionDto } from './dto/update-commission.dto';
   import {
     CommissionCreateFailedException,
     CommissionUpdateFailedException,

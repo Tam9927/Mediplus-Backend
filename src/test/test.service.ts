@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import testRepository from './test.repository';
+import { TestDTO } from 'src/test/dto/test.dto';
 
 @Injectable()
 export class TestService {
-  async createTest(data: any) {
+  async createTest(data: TestDTO) {
     return await testRepository.create(data);
   }
 

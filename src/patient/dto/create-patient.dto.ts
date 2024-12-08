@@ -15,7 +15,7 @@ export class CreatePatientDto {
 
   @IsOptional()
   @IsNumber()
-  doctor_id?: number;
+  doctor_id?: number;  
 
   @IsOptional()
   @IsNumber()

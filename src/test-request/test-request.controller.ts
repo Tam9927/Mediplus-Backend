@@ -3,14 +3,15 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { TestRequestService } from './test-request.service';
 import { ValidationPipe } from '@nestjs/common';
+import { TestRequestDTO } from 'src/test-request/dto/test-request.dto';
 
 @Controller('test-requests')
 export class TestRequestController {
   constructor(private readonly testRequestService: TestRequestService) {}
 
   @Post()
-  async createRequest(@Body(new ValidationPipe()) data) {
-    return await this.testRequestService.createRequest(data);
+  async createTestRequest(@Body(new ValidationPipe()) testRequestDTO: TestRequestDTO) {
+    return await this.testRequestService.createRequest(testRequestDTO);
   }
 
   @Get(':id')
