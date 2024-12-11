@@ -23,9 +23,10 @@ Test.init({
     },
   },
 
-  payment: {
+  cost: {
     type: DataTypes.FLOAT,
-    defaultValue: 0,
+    allowNull: false,
+    defaultValue: 0.0,
   },
 }, {
   sequelize,

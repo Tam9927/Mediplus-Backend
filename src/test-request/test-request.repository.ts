@@ -1,50 +1,15 @@
 
 
-// import {Test,TestRequestTest,TestRequest} from '../model';
-
-// class TestRequestRepository {
-//   async create(data: any) {
-//     const { doctorId, patientId, tests, status, remarks } = data;
-
-//     const testRequest = await TestRequest.create(
-//       { doctorId, patientId, status, remarks },
-//       { include: { all: true } }
-//     );
-
-//     if (tests && Array.isArray(tests)) {
-//       const testAssociations = tests.map(testId => ({ testRequestId: testRequest.dataValues.id, testId }));
-//       await TestRequestTest.bulkCreate(testAssociations);
-//     }
-
-//     return testRequest;  
-//   }
-
-//   async findById(id: number) {
-//     return await TestRequest.findByPk(id, {
-//       include: [{ model: Test, as: 'tests' }],
-//     });
-//   }
-
-//   async findAll() {
-//     return await TestRequest.findAll({
-//       include: [{ model: Test, as: 'tests' }],
-//     });
-//   }
-// }
-
-// export default new TestRequestRepository();
-
-
-import { Test, TestRequest, TestRequestTest } from '../model';
-
+import { Test, TestRequest, TestRequestTest,Doctor,CenterBalanceSheet } from '../model';
+  
 class TestRequestRepository {
  
   async createTestRequest(data: { 
     doctorId: number; 
     patientId: number; 
-    paymentStatus: string; 
+    Status: string; 
     remarks?: string; 
-  }) {
+  }) {        
     return await TestRequest.create(data);
   }
 
@@ -57,11 +22,37 @@ class TestRequestRepository {
   }
 
 
+  
+
   async findById(id: number) {
     return await TestRequest.findByPk(id, {
       include: [{ model: Test, as: 'tests' }],
     });
   }
+
+  async findByIdWithTests(id: number) {
+    return await TestRequest.findByPk(id, {
+      include: [{ model: Test, as: 'tests' }],
+    });  
+  }
+
+  async updateDoctorIncome(doctorId: number, income: number) {
+    const doctor = await Doctor.findByPk(doctorId);
+    if (!doctor) throw new Error('Doctor not found.');
+  
+    doctor.dataValues.totalIncome = (doctor.dataValues.totalIncome || 0) + income;
+    await doctor.save();
+  }
+
+  async updateCenterIncome(amount: number) {
+    const center = await CenterBalanceSheet.findOne();
+    if (!center) throw new Error('Center balance sheet not found.');
+  
+    center.dataValues.totalIncome = (center.dataValues.totalIncome || 0) + amount;
+    await center.save();
+  }
+     
+  
 
   async findAll() {
     return await TestRequest.findAll({  

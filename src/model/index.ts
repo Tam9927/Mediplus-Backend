@@ -6,7 +6,8 @@ import Manager from "./manager.model";
 import Test from "./test.model";   
 import TestCategory from "./testCategory.model";
 import TestRequest from "./testRequest.model";
-import TestRequestTest from "./testRequestTest.model";            
+import TestRequestTest from "./testRequestTest.model";
+import CenterBalanceSheet from "./center-balance-sheet";                
           
 
 Doctor.hasMany(Patient, { foreignKey: 'doctor_id', as: 'patients',onDelete: 'SET NULL' });
@@ -37,7 +38,8 @@ TestRequest.belongsTo(Patient, { foreignKey: 'patientId', as: 'patient' });
 TestRequest.belongsToMany(Test, { through: TestRequestTest, as: 'tests', foreignKey: 'testRequestId' });
 Test.belongsToMany(TestRequest, { through: TestRequestTest, as: 'testRequests', foreignKey: 'testId' });
 
+
   
 
-export { Doctor, Patient, Agent, Commission, Manager, Test, TestCategory, TestRequest,TestRequestTest };                                           //database migrations in the fututre
+export { Doctor, Patient, Agent, Commission, Manager, Test, TestCategory, TestRequest,TestRequestTest,CenterBalanceSheet};                                           //database migrations in the fututre
 

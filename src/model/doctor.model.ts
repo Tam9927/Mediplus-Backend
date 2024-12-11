@@ -15,6 +15,7 @@ class Doctor extends Model {
   public name!: string;
   public contact!: string;
   public specialization: string;
+  public totalIncome!: number;
   public patients?: Patient[];
 
 }
@@ -40,10 +41,10 @@ Doctor.init(
         allowNull: false,
       },
 
-      totalIncome: {
-        type: DataTypes.FLOAT,
+      dailyIncome: {
+        type: DataTypes.FLOAT(10, 2),
         allowNull: false,
-        defaultValue: 0,
+        defaultValue: 0.0,  
       },
 
     

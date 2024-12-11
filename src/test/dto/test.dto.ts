@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsInt, IsOptional } from 'class-validator';
+import { IsString, IsNotEmpty, IsInt, IsOptional, IsNumber,IsPositive } from 'class-validator';
 
 export class TestDTO {
   @IsString()
@@ -10,4 +10,10 @@ export class TestDTO {
 
   @IsOptional()
   description?: string;  // Optional description for the test
+
+  @IsNumber()
+  @IsPositive()
+  cost: number;
+
+
 }

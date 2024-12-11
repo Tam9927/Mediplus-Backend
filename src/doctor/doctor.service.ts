@@ -9,7 +9,7 @@ export class DoctorService {
     const doctorCount = await doctorRepository.countBySpecialization(data.specialization);
     if (doctorCount >= 2) {
       return null; // Indicating the operation is invalid
-    }
+    }   
     return await doctorRepository.create(data);
   }
 

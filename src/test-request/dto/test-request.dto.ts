@@ -17,5 +17,5 @@ export class TestRequestDTO {
 
   @IsString()
   @IsNotEmpty()
-  paymentStatus: string; // The status of the test request (e.g., "Pending", "Completed")
-}  
+  Status: string; // The status of the test request (e.g., "Pending", "Completed")
+}    

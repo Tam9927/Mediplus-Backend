@@ -29,7 +29,7 @@ authenticateAndSync();
   
 sequelize.sync({force:true}).then(() => {
   console.log('Database synced');  
-});
+});  
    
 
 //module.exports = {sequelize};

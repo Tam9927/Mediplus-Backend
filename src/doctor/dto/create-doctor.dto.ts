@@ -1,4 +1,5 @@
 import { IsString, IsNumber, IsPositive, IsPhoneNumber, IsNotEmpty, isNotEmpty } from 'class-validator';
+import { Min } from 'sequelize-typescript';
 
 export class CreateDoctorDto {
   @IsString()
@@ -12,5 +13,11 @@ export class CreateDoctorDto {
   @IsString()
   @IsNotEmpty()
   specialization: string;
+
+  @IsNumber()
+  @IsPositive()  
+  dailyIncome: number;
+  
+  
 }
   

@@ -19,6 +19,7 @@ import { ManagerModule } from './manager/manager.module';
 import { TestCategoryModule } from './test-category/test-category.module';
 import { TestModule } from './test/test.module';
 import { TestRequestModule } from './test-request/test-request.module';
+
     
 @Module({
   imports: [
@@ -36,7 +37,7 @@ import { TestRequestModule } from './test-request/test-request.module';
     DoctorModule,
     AgentModule,
     CommissionModule,
-    ManagerModule,
+    ManagerModule,  
     TestCategoryModule,
     TestModule,
     TestRequestModule,
