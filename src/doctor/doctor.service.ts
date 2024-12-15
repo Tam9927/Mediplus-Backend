@@ -3,6 +3,7 @@
 import doctorRepository from './doctor.repository';
 import { CreateDoctorDto } from 'src/doctor/dto/create-doctor.dto';
 import { UpdateDoctorDto } from 'src/doctor/dto/update-doctor.dto';
+import { paginate,PaginationParams} from 'src/utils/paginationUtils';
 
 export class DoctorService {
   async createDoctor(data: CreateDoctorDto) {
@@ -30,7 +31,20 @@ export class DoctorService {
     return await doctorRepository.deleteById(id);
   }
 
-  async getAllDoctors() {
-    return await doctorRepository.findAll();
+  // async getAllDoctors() {
+  //   return await doctorRepository.findAll();
+  // }
+
+  async getAllDoctors(query: PaginationParams) {
+    return await paginate(() => doctorRepository.findAndPaginate({}), query);
   }
-}
+  
+  
+
+
+// async getAllDoctors(query: PaginationParams) {
+//     return await paginate(doctorRepository, query, {
+//       include: { all: true }, // Include associated models (e.g., patients)
+//     });
+//   }
+}  

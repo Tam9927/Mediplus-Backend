@@ -27,10 +27,10 @@ async function authenticateAndSync() {
 
 authenticateAndSync();  
   
-sequelize.sync({force:true}).then(() => {
+sequelize.sync().then(() => {
   console.log('Database synced');  
 });  
-   
+      
 
 //module.exports = {sequelize};
 export default sequelize;  

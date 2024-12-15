@@ -15,24 +15,11 @@ class DoctorRepository {
   async findById(id: number) {
     return await Doctor.findByPk(id, { include: { all: true } }); // Include associations (e.g., patients)
   }
-
-//   async findByIdWithPatients(doctorId: number) {
-//      console.log( Doctor.findOne({ 
-//       where: { id: doctorId },
-//       include: [{ model: Patient, as: 'patients' }],
-//     }));
-
-//     return Doctor.findOne({
-//         where: { id: doctorId },
-//         include: [{ model: Patient, as: 'patients' }],
-//       });
-
-// }
   
 
 async getDoctorWithPatients(doctorId: number) {
     try {
-      const doctor = await Doctor.findOne({
+      const doctor = await Doctor.findOne({    
         where: { id: doctorId },
         include: [{
           model: Patient,
@@ -49,7 +36,6 @@ async getDoctorWithPatients(doctorId: number) {
   }
   
 
-  // Update doctor record by ID
   async updateById(id: number, data: any) {
     const doctor = await this.findById(id);
     if (doctor) {
@@ -63,11 +49,24 @@ async getDoctorWithPatients(doctorId: number) {
     return await Doctor.destroy({ where: { id } });
   }
 
-  // Get all doctor records
-  async findAll() {
-    return await Doctor.findAll({ include: { all: true } }); // Include associated patients if any
-  }
+  // //Get all doctor records
+  // async findAll() {
+  //   return await Doctor.findAndCountAll({ include: { all: true } }); // Include associated patients if any
+  // }
 
+  async findAndPaginate(queryOptions: any) {
+    console.log(queryOptions)
+    return await Doctor.findAndCountAll({
+      ...queryOptions,
+      include: { all: true },  
+    });
+  }
+    
+
+
+
+
+  
   async countBySpecialization(specialization: string) {
     return await Doctor.count({ where: { specialization } });
   }
